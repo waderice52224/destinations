@@ -5,13 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sign In</title>
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
 </head>
 <body>
-<h1>Sign In</h1>
-<label for="email">Name</label>
-<input id="email" type="text">
-<label for="password">Password</label>
-<input id="password" type="text">
-<a href="{% url 'sign_up' %}">Sign up</a>
+    <div class="container">
+        <h1>Sign In</h1>
+        <form>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Name</label>
+                <input id="email" type="text" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" required>
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+        <div class="sign-up">
+            <p>Don't have an account? <a href="{% url 'sign_up' %}">Sign up</a></p>
+        </div>
+    </div>
 </body>
 </html>
