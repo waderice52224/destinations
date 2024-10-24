@@ -5,6 +5,7 @@ from django.contrib.auth import login
 from .models import User, Session
 from .decorators import login_required_custom
 import secrets
+from .models import Destination
 
 
 @login_required_custom
@@ -56,3 +57,30 @@ def new_user(req):
         return response
 
     return render(req, '/', {'error_message': '400 Error: Message was not a POST'})
+
+
+def places_visited(request):
+    destinations = Destination.objects.all()  # Get all destinations
+    return render(request, 'core/places_visited.html', {'destinations': destinations})
+
+
+@login_required_custom
+def new_destination(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        review = request.POST.get('review')
+        rating = request.POST.get('rating')
+        user = request.user  # Assuming you have user authentication set up
+
+        # Create a new Destination object
+        Destination.objects.create(
+            name=name,
+            review=review,
+            rating=rating,
+            user=user,
+            share_publicly=True  # Assuming you want to share by default
+        )
+
+        return redirect('places_visited')  # Redirect to the places visited page
+
+    return render(request, 'core/new_destination.html')

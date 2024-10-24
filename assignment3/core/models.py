@@ -24,9 +24,8 @@ class Session(models.Model):
     token = models.TextField(default='')
 
 class Destination(models.Model):
-    id = models.BigAutoField(primary_key=True)
     name = models.TextField()
     review = models.TextField()
     rating = models.IntegerField()
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    share_publicly = models.BooleanField()
+    share_publicly = models.BooleanField(default=True)

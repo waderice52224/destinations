@@ -1,0 +1,25 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Places Visited</title>
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+</head>
+<body>
+    <h1>Places Users Have Been</h1>
+    <div class="container">
+        {% for destination in destinations %}
+            <div class="destination">
+                <h2>{{ destination.name }}</h2>
+                <p>Rating: {{ destination.rating }}</p>
+                <p>Comment: {{ destination.review }}</p>
+                <p>Reviewed by: {{ destination.user.name }}</p>
+            </div>
+        {% empty %}
+            <p>No places have been visited yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
