@@ -28,4 +28,4 @@ class Destination(models.Model):
     review = models.TextField()
     rating = models.IntegerField()
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    share_publicly = models.BooleanField(default=True)
+    share_pub = models.BooleanField(default=True)
